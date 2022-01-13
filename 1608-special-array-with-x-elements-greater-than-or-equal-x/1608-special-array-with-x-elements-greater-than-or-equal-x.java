@@ -20,11 +20,11 @@ class Solution {
         while(start <= end){
             int mid = start + (end-start)/2;
             int currentCount = count(nums, mid);
-            // if currentCount of mid is less , we have to increase overall count, move to second part
+            // if currentCount of elements >= mid is less than mid ,answer lies in first part
             if(mid > currentCount)
                 end = mid-1;
             else 
-                // if currentCount is more, we have to reduce the overall count, move to first part
+                // if currentCount of elements >= mid is more than mid, answer lies in second part
                 if(mid < currentCount)
                     start = mid+1;
             else 
