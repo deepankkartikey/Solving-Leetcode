@@ -11,10 +11,12 @@ class Solution {
                 idx++;
         }
         
-        // find missing and repeated number
+        // repeated and missing numbers always occur together in a cyclic sorted array
         for(int i=0; i<nums.length; i++){
             if(nums[i] != i+1){
+                // repeated number
                 res[0] = nums[i];
+                // missing number
                 res[1] = i+1;
             }
         }
