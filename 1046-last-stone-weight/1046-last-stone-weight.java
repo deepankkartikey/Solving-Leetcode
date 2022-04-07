@@ -1,21 +1,23 @@
 class Solution {
     public int lastStoneWeight(int[] stones) {
-        // using max-heap logic  
-        PriorityQueue<Integer> bag = new PriorityQueue<>();
+        // create a max heap
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a,b)->(b-a));
         
-        // create a max heap from given stone weights
-        // PriorityQueue stores elements as min heap by default
-        // negating each weight helps to make it max heap
+        // add all stone weights to heap
         for(int stone: stones)
-            bag.add(-stone);
+            pq.offer(stone);
         
-        while(bag.size() > 1){
-        int firstStone = -bag.remove();
-        int secondStone = -bag.remove();
-        if(firstStone != secondStone)
-            bag.add(-(firstStone-secondStone));
+        // take top 2 heaviest stones everytime
+        // collide and find resultant
+        // do this until only one element is left in the heap
+        while(pq.size()>1){
+            int first = pq.poll();
+            int second = pq.poll();
+            if(first == second)
+                continue;
+            else
+                pq.offer(first-second);
         }
-        
-        return bag.size() > 0 ? -bag.remove() : 0;
+        return pq.size() == 0 ? 0 : pq.poll();
     }
 }
