@@ -1,25 +1,18 @@
 class Solution {
-    
-    public void findCombinations(int idx, int[] arr, int target, List<List<Integer>> ans, List<Integer> ds){
-        // BASE CASE
-        if(idx == arr.length){
-            // end of indices and found a valid subsequence
-            // add subsequence to ans list
-            if(target == 0)
-                ans.add(new ArrayList<>(ds));
-            return; 
+        private void findCombinations(int idx, int[] candidates, int target, List<List<Integer>> combinations, List<Integer> combination) {
+        if(idx == candidates.length){
+            if(target == 0){
+                combinations.add(new ArrayList(combination));
+            }
+            return;
         }
- 
-        // when current candidate is less than or equal to target
-        // add to current subsequence and make call for repetition
-        if(arr[idx] <= target){
-            ds.add(arr[idx]);
-            findCombinations(idx, arr, target-arr[idx], ans, ds);
-            ds.remove(ds.size()-1);
+        
+        if(candidates[idx] <= target){
+            combination.add(candidates[idx]);
+            findCombinations(idx, candidates, target-candidates[idx], combinations, combination);
+            combination.remove(combination.size()-1);
         }
-        // when current candidate is greater than target
-        // just move to next candidate and repeat process for finding valid subsequence
-        findCombinations(idx+1, arr, target, ans, ds);
+        findCombinations(idx+1, candidates, target, combinations, combination);
     }
     
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
