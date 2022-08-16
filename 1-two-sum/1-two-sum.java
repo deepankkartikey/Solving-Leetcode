@@ -1,4 +1,6 @@
 class Solution {
+    // T: O(N)
+    // S: O(N)
     public int[] twoSum(int[] nums, int target) {
         int[] ans = new int[2];
         // <Value, index>
