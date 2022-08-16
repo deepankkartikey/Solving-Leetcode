@@ -1,25 +1,25 @@
 class Solution {
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> ans = new ArrayList<>();
+        boolean[] picked = new boolean[nums.length];
         List<Integer> ds = new ArrayList<>();
-        boolean[] fix = new boolean[nums.length];
-        permutations(nums, ds, ans, fix);
+        List<List<Integer>> ans = new ArrayList<>();
+        findPermutations(nums, ds, ans, picked);
         return ans;
     }
     
-    private void permutations(int[] nums, List<Integer> ds, List<List<Integer>> ans, boolean[] fix){
-        if(ds.size()==nums.length){
+    private void findPermutations(int[] nums, List<Integer> ds, List<List<Integer>> ans, boolean[] picked){
+        if(ds.size() == nums.length){
             ans.add(new ArrayList<>(ds));
             return;
         }
         
-        for(int i=0; i<nums.length; i++){
-            if(!fix[i]){
-                fix[i]=true;
-                ds.add(nums[i]);
-                permutations(nums, ds, ans, fix);
+        for(int idx=0; idx<nums.length; idx++){
+            if(!picked[idx]){
+                picked[idx] = true;
+                ds.add(nums[idx]);
+                findPermutations(nums, ds, ans, picked);
                 ds.remove(ds.size()-1);
-                fix[i]=false;
+                picked[idx] = false;
             }
         }
     }
