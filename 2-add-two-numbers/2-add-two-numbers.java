@@ -9,44 +9,28 @@
  * }
  */
 class Solution {
-        public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode res = new ListNode(-1);
-        ListNode tmp = res;
-        int carry = 0;
-        int sum = 0;
-        while (l1 != null && l2 != null) {
-            sum = l1.val + l2.val;
-            sum += carry;
-            tmp.next = new ListNode(sum%10);
-            sum /= 10;
-            carry = sum;
-            tmp = tmp.next;
-            l1 = l1.next;
-            l2 = l2.next;
-        }
-        if (l1 == null) {   // l2 remains
-            while (l2 != null) {
-                sum = carry + l2.val;
-                tmp.next = new ListNode(sum%10);
-                sum /= 10;
-                carry = sum;
-                tmp = tmp.next;
-                l2 = l2.next;
-            }
-        }
-        else if (l2 == null) {   // l1 remains
-            while (l1 != null) {
-                sum = carry + l1.val;
-                tmp.next = new ListNode(sum%10);
-                sum /= 10;
-                carry = sum;
-                tmp = tmp.next;
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummy = new ListNode();
+        ListNode temp = dummy;
+        int sum, carry;
+        sum = carry = 0;
+        
+        while(l1 != null || l2 != null || carry == 1){
+            sum = 0;
+            if(l1 != null){
+                sum += l1.val;
                 l1 = l1.next;
             }
+            if(l2 != null){
+                sum += l2.val;
+                l2 = l2.next;
+            }
+            sum += carry;
+            ListNode node = new ListNode(sum%10);
+            carry = sum/10;
+            temp.next = node;
+            temp = temp.next;
         }
-        if (carry != 0) {
-            tmp.next = new ListNode(carry);
-        }
-        return res.next;
+        return dummy.next; // point to head of solution node
     }
 }
