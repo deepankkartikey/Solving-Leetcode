@@ -1,18 +1,16 @@
 class Solution {
-    // T: O(N)
-    // S: O(N)
     public int[] twoSum(int[] nums, int target) {
-        int[] ans = new int[2];
-        // <Value, index>
-        HashMap<Integer, Integer> hs = new HashMap<>();
+        int[] res = new int[2];
+        HashMap<Integer, Integer> hm = new HashMap<>();
         for(int idx=0; idx<nums.length; idx++){
-            if(hs.containsKey(target-nums[idx])){
-                ans[0] = idx;
-                ans[1] = hs.get(target-nums[idx]);
-            }else{
-                hs.put(nums[idx], idx);
+            if(hm.containsKey(target-nums[idx])){
+                res[0] = idx;
+                res[1] = hm.get(target-nums[idx]);
+            }
+            else{
+                hm.put(nums[idx], idx);
             }
         }
-        return ans;
+        return res;
     }
 }
