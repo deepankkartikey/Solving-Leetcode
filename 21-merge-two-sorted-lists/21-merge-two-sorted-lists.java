@@ -9,36 +9,31 @@
  * }
  */
 class Solution {
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        // special cases
-        // if any of the list is empty, return the other list
-        if(l1 == null)
-            return l2;
-        if(l2 == null)
-            return l1;
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if(list1 == null) return list2;
+        if(list2 == null) return list1;
         
-        // take two pointers l1, l2
-        // put l1 on list with lesser head value
-        if(l1.val > l2.val){
-            ListNode tmp = l1;
-            l1 = l2;
-            l2 = tmp;
+        if(list1.val > list2.val){
+            // swap list1 and list2 pointers
+            ListNode tmp = list1;
+            list1 = list2;
+            list2 = tmp;
         }
         
-        ListNode res = l1;
-        while(l1 != null && l2 != null){
+        ListNode resHead = list1;
+        
+        while(list1 != null && list2 != null){
             ListNode tmp = null;
-            while(l1 != null && l1.val <= l2.val){
-                tmp = l1;
-                l1 = l1.next;
+            while(list1 != null && list1.val <= list2.val){
+                tmp = list1;
+                list1 = list1.next;
             }
-            tmp.next  = l2;
-            
-            // swap
-            tmp = l1;
-            l1 = l2;
-            l2= tmp;
+            // as soon as list1.val > list2.val, swap list1 and list2
+            tmp.next = list2;
+            ListNode swapPtr = list1;
+            list1 = list2;
+            list2 = swapPtr;
         }
-        return res;
+        return resHead;
     }
 }
