@@ -10,6 +10,5 @@ class Solution(object):
                 word = word[-1:]
         words.reverse()
         words = " ".join(words)
-        words = words.strip()
         return words
         
