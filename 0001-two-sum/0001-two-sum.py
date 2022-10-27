@@ -5,13 +5,13 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        dictionary = {}
-        for i,num in enumerate(nums):
-            key = target-num
-            if key in dictionary:
-                return [dictionary[key], i]
-            else:
-                dictionary[num] = i
-                
-        return [-1,-1]
+        d = {}
         
+        for i, num in enumerate(nums):
+            key = target - num
+            if key in d.keys():
+                return[d[key], i]
+            else:
+                d[num] = i
+                
+        return [-1, -1]
