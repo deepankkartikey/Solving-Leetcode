@@ -7,10 +7,7 @@ class Solution(object):
         if len(s) <= 1:
             return True
         
-        newStr = ""
-        for ch in s:
-            if ch.isalnum():
-                newStr = newStr+ch.lower()
+        newStr = [ch.lower() for ch in s if ch.isalnum()]
         
         revStr = newStr[-1::-1]
         # print("newStr: ", newStr)
