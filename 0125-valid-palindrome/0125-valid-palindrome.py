@@ -15,7 +15,4 @@ class Solution(object):
         revStr = newStr[-1::-1]
         # print("newStr: ", newStr)
         # print("revStr: ", revStr)
-        if revStr == newStr:
-            return True
-        
-        return False
+        return revStr == newStr
