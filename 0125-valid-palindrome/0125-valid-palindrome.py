@@ -8,8 +8,4 @@ class Solution(object):
             return True
         
         newStr = [ch.lower() for ch in s if ch.isalnum()]
-        
-        revStr = newStr[-1::-1]
-        # print("newStr: ", newStr)
-        # print("revStr: ", revStr)
-        return revStr == newStr
+        return newStr == newStr[::-1]
