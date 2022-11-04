@@ -7,18 +7,15 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        if root in [p, q, None]:
-            return root
+        min_val = min(p.val, q.val)
+        max_val = max(p.val, q.val)
         
-        left = self.lowestCommonAncestor(root.left, p, q)
-        right = self.lowestCommonAncestor(root.right, p, q)
-        
-        if left == 'null' or left == None:
-            return right
-        elif right == 'null' or right == None:
-            return left
-        else:
-            return root
-        
-        
+        while True:
+            if min_val <= root.val <= max_val:
+                return root
+            elif max_val < root.val: # both values lie in left subtree
+                root = root.left # LCA should be in left subtree
+            elif min_val > root.val: # both values lie in right subtree
+                root = root.right # LCA should be in right subtree
+            
         
